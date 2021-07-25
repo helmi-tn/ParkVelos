@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Circuits{% endblock %}
+
+{% block javascripts %}
+<script src="{{asset('js/delete_circuit.js')}}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="page-header">
+    <br><br><br>
+    {% if circuits %}
+        <!-- Table header styling -->
+				<div class="card">
+					<div class="card-header header-elements-inline">
+						<h5 class="card-title"><strong>Les circuits disponibles.</strong></h5>
+						<div class="header-elements">
+							<div class="list-icons">
+		                		<a class="list-icons-item" data-action="collapse"></a>
+		                		<a class="list-icons-item" data-action="reload"></a>
+		                		<a class="list-icons-item" data-action="remove"></a>
+		                	</div>
+	                	</div>
+					</div>
+
+					<div class="card-body">
+						Example of a custom table <code>header</code> styling. Table header supports default contextual and custom background colors available in <a href="colors_primary.html">custom color system</a>. To use custom color in the table header, add <code>.bg-*</code> class to the header row. All border and text colors will be automatically adjusted.
+					</div>
+
+					<div class="table-responsive">
+						<table id="circuits" class="table datatable-scroll-y" >
+							<thead>
+								<tr class="bg-blue">
+									<th>#</th>
+									<th>Nom</th>
+									<th>Difficulté</th>
+									<th>Attribut</th>
+                                    <th>Image</th>
+                                    <th>Trajectoire</th>
+                                    <th>Catégorie</th>
+                                    <th>Sites</th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+                            {% for circuit in circuits %}
+								<tr>
+									<td>{{loop.index}}</td>
+									<td>{{circuit.nom}}</td>
+									<td>{{circuit.difficulte}}</td>
+									<td>{{circuit.attribut}}</td>
+                                    <td>{{circuit.image}}</td>
+									<td>TRAJECTOIRES NULL</td>
+                                    <td>{{circuit.categorie.nom}}</td>
+									<td><td>
+                                    <td><a class="btn btn-danger" href="#" data-toggle="modal" data-target="#modal_delete{{circuit.id}}">Delete</a>
+									<a class="btn btn-dark" href="#" data-id="{{circuit.id}}">Edit</a></td></td>
+								</tr>
+								<!-- Iconified modal -->
+				<div id="modal_delete{{circuit.id}}" class="modal fade" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header bg-danger">
+								<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;Suppréssion</h5>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+							<div class="modal-body">
+								<div class="alert alert-info alert-dismissible alert-styled-left border-top-0 border-bottom-0 border-right-0">
+					                <span class="font-weight-semibold">Suppréssion d'un circuit.</span>
+					                <button type="button" class="close" data-dismiss="alert">×</button>
+					            </div>
+
+								<h6 class="font-weight-semibold"><i class="icon-law mr-2"></i> Etes-vous sures de supprimer cet circuit?.</h6>
+								<p>Circuit : {{circuit.nom}}</p>
+
+							</div>
+
+							<div class="modal-footer">
+								<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> Close</button>
+								<a class="btn bg-primary" href="{{path('delete_categorie_site',{'id':circuit.id})}}"><i class="icon-checkmark3 font-size-base mr-1"></i> Delete</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /iconified modal -->
+                            {% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- /table header styling -->
+
+
+
+    {% else %}
+        <h1>Il n ya pas des circuits dans la base de données!</h1>
+    {% endif %}
+    </div>
+
+{% endblock %}
+

@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categories des sites{% endblock %}
+
+{% block javascripts %}
+<script src="{{asset('js/delete_categorie_site.js')}}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="page-header">
+    <br><br><br>
+    {% if categoriesites %}
+        <!-- Table header styling -->
+				<div class="card">
+					<div class="card-header header-elements-inline">
+						<h5 class="card-title"><strong>Les catogories des sites disponibles.</strong></h5>
+						<div class="header-elements">
+							<div class="list-icons">
+		                		<a class="list-icons-item" data-action="collapse"></a>
+		                		<a class="list-icons-item" data-action="reload"></a>
+		                		<a class="list-icons-item" data-action="remove"></a>
+		                	</div>
+	                	</div>
+					</div>
+
+					<div class="card-body">
+						Example of a custom table <code>header</code> styling. Table header supports default contextual and custom background colors available in <a href="colors_primary.html">custom color system</a>. To use custom color in the table header, add <code>.bg-*</code> class to the header row. All border and text colors will be automatically adjusted.
+					</div>
+
+					<div class="table-responsive">
+						<table class="table" id="categ_sites">
+							<thead>
+								<tr class="bg-blue">
+									<th>#</th>
+									<th>Nom</th>
+									<th></th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+                            {% for categoriesite in categoriesites %}
+								<tr>
+									<td>{{loop.index}}</td>
+									<td>{{categoriesite.nom}}</td>
+									<td></td>
+									<td></td>
+									<td><a class="btn btn-danger" href="#" data-toggle="modal" data-target="#modal_delete{{categoriesite.id}}">Delete</a>
+									<a class="btn btn-dark" href="#" data-id="{{categoriesite.id}}">Edit</a></td></td>
+								</tr>
+								<!-- Iconified modal -->
+				<div id="modal_delete{{categoriesite.id}}" class="modal fade" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header bg-danger">
+								<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;Suppréssion</h5>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+							<div class="modal-body">
+								<div class="alert alert-info alert-dismissible alert-styled-left border-top-0 border-bottom-0 border-right-0">
+					                <span class="font-weight-semibold">Suppréssion d'une catégorie.</span>
+					                <button type="button" class="close" data-dismiss="alert">×</button>
+					            </div>
+
+								<h6 class="font-weight-semibold"><i class="icon-law mr-2"></i> Etes-vous sures de supprimer cette catégorie?.</h6>
+								<p>Catégorie : {{categoriesite.nom}}</p>
+
+							</div>
+
+							<div class="modal-footer">
+								<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> Close</button>
+								<a class="btn bg-primary" href="{{path('delete_categorie_site',{'id':categoriesite.id})}}"><i class="icon-checkmark3 font-size-base mr-1"></i> Delete</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /iconified modal -->
+
+                            {% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- /table header styling -->
+
+
+
+    {% else %}
+        <h1>Il n ya pas des categories de sites dans la base de données!</h1>
+    {% endif %}
+    </div>
+
+{% endblock %}

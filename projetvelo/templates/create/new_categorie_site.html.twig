@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New site{% endblock %}
+
+
+
+{% block body %}
+    <br><br><br>
+    {{ form_start(form_categ_site)}}
+    <div class="content">
+    <div class="card">
+        <div class="card-body">
+            <fieldset class="mb-3">
+                <legend class="text-uppercase font-size-sm font-weight-bold">Créer une categorie de sites</legend>
+
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Nom</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_categ_site.nom, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'Nom'}})}}
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary" style="float:right;">Submit <i class="icon-paperplane ml-2"></i></button>
+            </fieldset>
+        </div>
+</div>
+</div>
+{{ form_end(form_categ_site)}}
+</form>
+
+
+{% endblock %}
