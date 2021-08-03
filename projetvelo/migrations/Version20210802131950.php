@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210721131846 extends AbstractMigration
+final class Version20210802131950 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,12 +20,16 @@ final class Version20210721131846 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE site CHANGE map map LONGTEXT DEFAULT NULL');
+        $this->addSql('ALTER TABLE client ADD commande_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE client ADD CONSTRAINT FK_C744045582EA2E54 FOREIGN KEY (commande_id) REFERENCES commande (id)');
+        $this->addSql('CREATE INDEX IDX_C744045582EA2E54 ON client (commande_id)');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE site CHANGE map map LONGTEXT CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('ALTER TABLE client DROP FOREIGN KEY FK_C744045582EA2E54');
+        $this->addSql('DROP INDEX IDX_C744045582EA2E54 ON client');
+        $this->addSql('ALTER TABLE client DROP commande_id');
     }
 }

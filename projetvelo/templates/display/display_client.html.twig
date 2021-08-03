@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Client{% endblock %}
+
+{% block body %}
+<br><br><br>
+ <div class="content">
+    <div class="card">
+        <div class="card-body">
+            <fieldset class="mb-3">
+                <legend class="text-uppercase font-size-sm font-weight-bold">Client </legend>
+
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Nom :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{client.nom}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Prenom :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{client.prenom}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">CIN :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{client.cin}}
+                    </div></div>
+                </div>
+                <br>
+                <a href="{{path('show_clients')}}"><button type="button" class="btn btn-primary">Retourner</button></a>
+            </fieldset>
+        </div>
+</div>
+</div>
+{% endblock %}

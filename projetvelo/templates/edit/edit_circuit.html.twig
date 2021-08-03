@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier circuit{% endblock %}
+
+
+
+{% block body %}
+    <br><br><br>
+    {{ form_start(form_circuit)}}
+    <div class="content">
+    <div class="card">
+        <div class="card-body">
+            <fieldset class="mb-3">
+                <legend class="text-uppercase font-size-sm font-weight-bold">Modifier un circuit</legend>
+
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Nom :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_circuit.nom, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'Nom'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Description :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_circuit.description, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'Description'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Difficulté :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_circuit.difficulte, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'Difficulté'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Attribut :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_circuit.attribut, {'attr' : {'class': 'form-control', 'placeholder':'Icon'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Image :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_circuit.image, {'attr' : {'class': 'form-control', 'placeholder':'Image'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Trajectoire :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_circuit.trajectoire, {'attr' : {'class': 'form-control', 'placeholder':'Trajectoire'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Categorie :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_circuit.categorie, {'attr' : {'class': 'form-control', 'placeholder':'Categorie','multiple' : 'multiple'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Sites :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_circuit.site, {'attr' : {'class': 'form-control', 'placeholder':'Sites','multiple' : 'multiple'}})}}
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-success" style="float:right;">Modifier <i class="icon-checkmark3 font-size-base mr-1"></i></button>
+                <a href="{{path('show_circuits')}}"><button class="btn btn-primary" style="float:left;">Retourner <i class="icon-checkmark3 font-size-base mr-1"></i></button></a>
+            </fieldset>
+        </div>
+</div>
+</div>
+
+{{ form_end(form_circuit)}}
+</form>
+
+
+{% endblock %}

@@ -3,8 +3,10 @@
 {% block title %}Categories des circuits{% endblock %}
 
 {% block javascripts %}
-	<script src="{{asset('js/delete_categorie_circuit.js')}}"></script>
+<script src="{{asset('build/global_assets/js/demo_pages/datatables_extension_buttons_init.js')}}"></script>
 {% endblock %}
+
+
 
 {% block body %}
      <div class="page-header">
@@ -23,12 +25,8 @@
 	                	</div>
 					</div>
 
-					<div class="card-body">
-						Example of a custom table <code>header</code> styling. Table header supports default contextual and custom background colors available in <a href="colors_primary.html">custom color system</a>. To use custom color in the table header, add <code>.bg-*</code> class to the header row. All border and text colors will be automatically adjusted.
-					</div>
-
 					<div class="table-responsive">
-						<table id="categ_circuit" class="table">
+						<table id="categ_circuit" class="table datatable-button-init-basic">
 							<thead>
 								<tr class="bg-blue">
 									<th>#</th>
@@ -43,8 +41,8 @@
 									<td>{{loop.index}}</td>
 									<td>{{categorie.nom}}</td>
 									<td></td>
-									<td><a class="btn btn-danger" href="#" data-toggle="modal" data-target="#modal_delete{{categorie.id}}">Delete</a>
-									<a class="btn btn-dark" href="#" data-id="{{categorie.id}}">Edit</a></td></td>
+									<td><a class="btn btn-light" href="{{path('display_categ_circuit',{'id':categorie.id})}}">Show</a>&nbsp;<a class="btn btn-danger" href="#" data-toggle="modal" data-target="#modal_delete{{categorie.id}}">Delete</a>
+									<a class="btn btn-dark" href="{{path('edit_categ_circuit',{'id':categorie.id})}}" >Edit</a></td></td>
 								</tr>
 									<!-- Iconified modal -->
 				<div id="modal_delete{{categorie.id}}" class="modal fade" tabindex="-1">
@@ -56,19 +54,16 @@
 							</div>
 
 							<div class="modal-body">
-								<div class="alert alert-info alert-dismissible alert-styled-left border-top-0 border-bottom-0 border-right-0">
-					                <span class="font-weight-semibold">Suppréssion d'une catégorie de circuit.</span>
-					                <button type="button" class="close" data-dismiss="alert">×</button>
-					            </div>
 
-								<h6 class="font-weight-semibold"><i class="icon-law mr-2"></i> Etes-vous sures de supprimer cet circuit?.</h6>
+								<h6 class="font-weight-semibold"><i class="icon-law mr-2"></i>Etes-vous sûr de supprimer cette catégorie de circuit ?</h6>
+								<br>
 								<p>Catégorie de circuit : {{categorie.nom}}</p>
 
 							</div>
 
 							<div class="modal-footer">
-								<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> Close</button>
-								<a class="btn bg-primary" href="{{path('delete_categorie_site',{'id':categorie.id})}}"><i class="icon-checkmark3 font-size-base mr-1"></i> Delete</a>
+								<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> Fermer</button>
+								<a class="btn bg-primary" href="{{path('delete_categorie_circuit',{'id':categorie.id})}}"><i class="icon-checkmark3 font-size-base mr-1"></i> Supprimer</a>
 							</div>
 						</div>
 					</div>
@@ -84,7 +79,11 @@
 
 
     {% else %}
-        <h1>Il n ya pas des categories de circuits dans la base de données!</h1>
+        <div class="card">
+		<div class="card-content"><br>
+        <h2>&nbsp;&nbsp;Il n y a pas de categories de circuits dans la base de données!</h2>
+		</div><br>
+	</div>
     {% endif %}
     </div>
 

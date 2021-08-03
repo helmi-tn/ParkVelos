@@ -21,6 +21,7 @@ class Circuit
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Type("string")
      */
     private $nom;
 
@@ -31,6 +32,7 @@ class Circuit
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Type("string")
      */
     private $description;
 

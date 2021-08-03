@@ -2,12 +2,13 @@
 
 {% block title %}Sites{% endblock %}
 
+
 {% block javascripts %}
-	<script src="{{asset('js/delete_site.js')}}"></script>
+<script src="{{asset('build/global_assets/js/demo_pages/datatables_extension_buttons_init.js')}}"></script>
 {% endblock %}
 
 {% block body %}
-     <div class="page-header">
+    <div class="page-header">
     <br><br><br>
     {% if sites %}
         <!-- Table header styling -->
@@ -23,12 +24,10 @@
 	                	</div>
 					</div>
 
-					<div class="card-body">
-						Example of a custom table <code>header</code> styling. Table header supports default contextual and custom background colors available in <a href="colors_primary.html">custom color system</a>. To use custom color in the table header, add <code>.bg-*</code> class to the header row. All border and text colors will be automatically adjusted.
-					</div>
+					
 
 					<div class="table-responsive">
-						<table id="sites" class="table" >
+						<table id="sites" class="table datatable-button-init-basic" >
 							<thead>
 								<tr class="bg-blue">
 									<th>#</th>
@@ -37,12 +36,11 @@
 									<th>Description</th>
                                     <th>Map</th>
                                     <th>Catégorie</th>
-									<th><th>
-									<th><th>
+									<th>Circuits</th>	
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-                            {% set num=1 %}
                             {% for site in sites %}
 								<tr>
 									<td>{{loop.index}}</td>
@@ -51,8 +49,9 @@
 									<td>{{site.description}}</td>
                                     <td>{{site.map}}</td>
 									<td>{{site.categoriesite.nom}}</td>
-									<td><a class="btn btn-danger" href="#" data-toggle="modal" data-target="#modal_delete{{site.id}}">Delete</a>
-									<a class="btn btn-dark" href="#" data-id="{{site.id}}">Edit</a></td>
+									<td></td>
+									<td><a class="btn btn-light" href="{{path('display_site',{'id':site.id})}}">Show</a>&nbsp;<a class="btn btn-danger" href="#" data-toggle="modal" data-target="#modal_delete{{site.id}}">Delete</a>
+									<a class="btn btn-dark" href="{{path('edit_site',{'id':site.id})}}">Edit</a></td>
 								</tr>
 								<!-- Iconified modal -->
 				<div id="modal_delete{{site.id}}" class="modal fade" tabindex="-1">
@@ -64,42 +63,40 @@
 							</div>
 
 							<div class="modal-body">
-								<div class="alert alert-info alert-dismissible alert-styled-left border-top-0 border-bottom-0 border-right-0">
-					                <span class="font-weight-semibold">Suppréssion d'un site.</span>
-					                <button type="button" class="close" data-dismiss="alert">×</button>
-					            </div>
 
-								<h6 class="font-weight-semibold"><i class="icon-law mr-2"></i> Etes-vous sures de supprimer cet site?.</h6>
+								<h6 class="font-weight-semibold"><i class="icon-law mr-2"></i> Etes-vous sûr de supprimer cet site ?</h6>
+								<br>
 								<p>Site : {{site.nom}}</p>
 
 							</div>
 
 							<div class="modal-footer">
-								<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> Close</button>
-								<a class="btn bg-primary" href="{{path('delete_categorie_site',{'id':Site.id})}}"><i class="icon-checkmark3 font-size-base mr-1"></i> Delete</a>
+								<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> Fermer</button>
+								<a class="btn bg-primary" href="{{path('delete_site',{'id':site.id})}}"><i class="icon-checkmark3 font-size-base mr-1"></i> Supprimer</a>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- /iconified modal -->
-
                             {% endfor %}
 							</tbody>
 						</table>
 					</div>
 				</div>
-				
 				<!-- /table header styling -->
 
 
 
     {% else %}
-	<div class="card">
-		<div class="card-content"
-        <h1>Il n ya pas de sites dans la base de données!</h1>
+        <div class="card">
+		<div class="card-content">
+		<br>
+        <h2>&nbsp;&nbsp;Il n y a pas de sites dans la base de données!</h2>
+		<br>
 		</div>
 	</div>
     {% endif %}
     </div>
 
 {% endblock %}
+

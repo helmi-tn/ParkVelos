@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New commande{% endblock %}
+
+{% block body %}
+    <br><br><br>
+    {{ form_start(form_commande,{'attr': {'novalidate': 'novalidate'}} )}}
+    <div class="content">
+    <div class="card">
+        <div class="card-body">
+            <fieldset class="mb-3">
+                <legend class="text-uppercase font-size-sm font-weight-bold">Créer une commande</legend>
+
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Nom :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_commande.nom, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'Nom'}})}}
+                    </div>
+                </div>
+                 <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Prenom :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_commande.prenom, {'attr' : { 'class': 'form-control', 'placeholder':'Prenom'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Email :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_commande.email, {'attr' : { 'class': 'form-control', 'placeholder':'Email'}})}}
+                    </div>
+                </div>
+                 <div class="form-group row">
+                    <label class="col-form-label col-lg-2">CIN :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_commande.cin, {'attr' : {'class': 'form-control', 'placeholder':'CIN'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Nombre de personnes :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_commande.nbpersonnes, {'attr' : {'class': 'form-control'}})}}
+                    </div>
+                </div>
+                 <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Date de debut :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_commande.debutdate, {'attr' : {'class': 'form-control'}})}}
+                    </div>
+                </div>
+                 <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Date de fin :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_commande.findate, {'attr' : {'class': 'form-control'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Commentaire :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_commande.commentaire, {'attr' : {'class': 'form-control', 'placeholder':'Commentaire'}})}}
+                    </div>
+                </div>
+                <p class="text-uppercase font-size-sm font-weight-bold">Client</p>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Nom :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_commande.client.nom, {'attr' : {'class': 'form-control', 'placeholder':'Nom'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Prenom :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_commande.client.prenom, {'attr' : {'class': 'form-control', 'placeholder':'Prenom'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">CIN :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_commande.client.cin, {'attr' : {'class': 'form-control', 'placeholder':'CIN'}})}}
+                    </div>
+                </div>
+                    <div class="col-lg-10" style="display:none;">
+                        {{ form_widget(form_commande.createdAt, {'attr' : {'class': 'form-control', 'placeholder':'Commentaire'}})}}
+                    </div>
+                <br>
+                <button type="submit" class="btn btn-primary" style="float:right;">Submit <i class="icon-checkmark3 font-size-base mr-1"></i></button>
+            </fieldset>
+        </div>
+</div>
+</div>
+
+{{ form_end(form_commande)}}
+</form>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier categorie circuit{% endblock %}
+
+
+
+{% block body %}
+    <br><br><br>
+    {{ form_start(form_categ_circuit)}}
+    <div class="content">
+    <div class="card">
+        <div class="card-body">
+            <fieldset class="mb-3">
+                <legend class="text-uppercase font-size-sm font-weight-bold">Modifier une categorie de circuit</legend>
+
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Nom de la catégorie :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_categ_circuit.nom, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'Nom'}})}}
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-success" style="float:right;">Modifier <i class="icon-checkmark3 font-size-base mr-1"></i></button>
+                <a href="{{path('show_categoriesite')}}"><button class="btn btn-primary" style="float:left;">Retourner <i class="icon-checkmark3 font-size-base mr-1"></i></button></a>
+            </fieldset>
+        </div>
+</div>
+</div>
+
+{{ form_end(form_categ_circuit)}}
+</form>
+
+
+{% endblock %}

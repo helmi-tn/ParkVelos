@@ -1,22 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New categorie site{% endblock %}
+{% block title %}New categorie circuit{% endblock %}
 
 
 
 {% block body %}
     <br><br><br>
-    {{ form_start(form_categ_site)}}
+    {{ form_start(form_categ_circuit)}}
     <div class="content">
     <div class="card">
         <div class="card-body">
             <fieldset class="mb-3">
-                <legend class="text-uppercase font-size-sm font-weight-bold">Créer une categorie de sites</legend>
+                <legend class="text-uppercase font-size-sm font-weight-bold">Créer une categorie de circuit</legend>
 
                 <div class="form-group row">
-                    <label class="col-form-label col-lg-2">Nom de la catégorie :</label>
+                    <label class="col-form-label col-lg-2">Nom de la circuit :</label>
                     <div class="col-lg-10">
-                        {{ form_widget(form_categ_site.nom, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'Nom'}})}}
+                        {{ form_widget(form_categ_circuit.nom, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'Nom'}})}}
                     </div>
                 </div>
                 <br>
@@ -26,7 +26,7 @@
 </div>
 </div>
 
-{{ form_end(form_categ_site)}}
+{{ form_end(form_categ_circuit)}}
 </form>
 
 

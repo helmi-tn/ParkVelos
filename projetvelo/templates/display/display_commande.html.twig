@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande{% endblock %}
+
+{% block body %}
+<br><br><br>
+ <div class="content">
+    <div class="card">
+        <div class="card-body">
+            <fieldset class="mb-3">
+                <legend class="text-uppercase font-size-sm font-weight-bold">Commande </legend>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Nom :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{commande.nom}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Prenom :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{commande.prenom}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Email :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{commande.email}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">CIN :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{commande.cin}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Nombre de personnes :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{commande.nbpersonnes}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Date de debut :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{commande.debutdate|date("d/m/Y")}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Date de fin :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{commande.findate|date("d/m/Y")}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Commentaire :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{commande.commentaire}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Date de creation :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{commande.createdAt|date("d/m/Y")}}
+                    </div></div>
+                </div>
+                <br>
+                <a href="{{path('show_commandes')}}"><button type="button" class="btn btn-primary">Retourner</button></a>
+            </fieldset>
+        </div>
+</div>
+</div>
+{% endblock %}

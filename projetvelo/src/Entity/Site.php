@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\SiteRepository;
+use App\Entity\CategorieSite;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\SiteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass=SiteRepository::class)
@@ -19,6 +22,7 @@ class Site
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Type("string")
      */
     private $nom;
 
@@ -44,6 +48,7 @@ class Site
 
     /**
      * @ORM\ManyToOne(targetEntity=CategorieSite::class, inversedBy="sites")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $categoriesite;
 

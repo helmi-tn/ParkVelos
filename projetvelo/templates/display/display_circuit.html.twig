@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{circuit.nom}}{% endblock %}
+
+{% block body %}
+<br><br><br>
+ <div class="content">
+    <div class="card">
+        <div class="card-body">
+            <fieldset class="mb-3">
+                <legend class="text-uppercase font-size-sm font-weight-bold">Circuit </legend>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Nom :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{circuit.nom}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Difficulté :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{circuit.difficulte}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Attribut :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{circuit.attribut}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Image :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{circuit.image}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Trajectoire :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{circuit.image}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Categorie :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{circuit.categorie.nom}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Sites :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    
+                    </div></div>
+                </div>
+                <br>
+                <a href="{{path('show_circuits')}}"><button type="button" class="btn btn-primary">Retourner</button></a>
+            </fieldset>
+        </div>
+</div>
+</div>
+{% endblock %}

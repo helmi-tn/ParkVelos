@@ -6,6 +6,7 @@ use App\Repository\CategorieSiteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CategorieSiteRepository::class)
@@ -21,11 +22,14 @@ class CategorieSite
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Type("string")
      */
     private $nom;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Site::class, mappedBy="categoriesite")
+     * @ORM\OneToMany(targetEntity=Site::class, mappedBy="categoriesite")
+     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $sites;
 

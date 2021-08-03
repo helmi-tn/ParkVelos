@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clients{% endblock %}
+
+{% block javascripts %}
+<script src="{{asset('build/global_assets/js/demo_pages/datatables_extension_buttons_init.js')}}"></script>
+{% endblock %}
+
+
+
+{% block body %}
+     <div class="page-header">
+    <br><br><br>
+    {% if clients %}
+        <!-- Table header styling -->
+				<div class="card">
+					<div class="card-header header-elements-inline">
+						<h5 class="card-title"><strong>Les clients disponibles.</strong></h5>
+						<div class="header-elements">
+							<div class="list-icons">
+		                		<a class="list-icons-item" data-action="collapse"></a>
+		                		<a class="list-icons-item" data-action="reload"></a>
+		                		<a class="list-icons-item" data-action="remove"></a>
+		                	</div>
+	                	</div>
+					</div>
+
+					<div class="table-responsive">
+						<table id="categ_circuit" class="table datatable-button-init-basic">
+							<thead>
+								<tr class="bg-blue">
+									<th>#</th>
+									<th>Nom</th>
+                                    <th>Prenom</th>
+                                    <th>CIN</th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+                            {% for client in clients %}
+								<tr>
+									<td>{{loop.index}}</td>
+									<td>{{client.nom}}</td>
+                                    <td>{{client.prenom}}</td>
+                                    <td>{{client.cin}}</td>
+									<td></td>
+									<td><a class="btn btn-light" href="{{path('display_client',{'id':client.id})}}">Show</a>&nbsp;<a class="btn btn-danger" href="#" data-toggle="modal" data-target="#modal_delete{{client.id}}">Delete</a>
+									<a class="btn btn-dark" href="{{path('edit_client',{'id':client.id})}}" >Edit</a></td></td>
+								</tr>
+									<!-- Iconified modal -->
+				<div id="modal_delete{{client.id}}" class="modal fade" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header bg-danger">
+								<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;Suppréssion</h5>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+							<div class="modal-body">
+
+								<h6 class="font-weight-semibold"><i class="icon-law mr-2"></i>Etes-vous sûr de supprimer cet client ?</h6>
+								<br>
+								<p>Client : {{client.nom}} {{client.prenom}}</p>
+
+							</div>
+
+							<div class="modal-footer">
+								<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> Fermer</button>
+								<a class="btn bg-primary" href="{{path('delete_client',{'id':client.id})}}"><i class="icon-checkmark3 font-size-base mr-1"></i> Supprimer</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /iconified modal -->
+                            {% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- /table header styling -->
+
+
+
+    {% else %}
+        <div class="card">
+		<div class="card-content"><br>
+        <h2>&nbsp;&nbsp;Il n y a pas de clients dans la base de données!</h2><br>
+		</div>
+	</div>
+    {% endif %}
+    </div>
+
+{% endblock %}
+

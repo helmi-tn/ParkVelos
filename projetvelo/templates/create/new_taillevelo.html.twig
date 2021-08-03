@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New taille velo{% endblock %}
+
+{% block body %}
+    <br><br><br>
+    {{ form_start(form_taillevelo)}}
+    <div class="content">
+    <div class="card">
+        <div class="card-body">
+            <fieldset class="mb-3">
+                <legend class="text-uppercase font-size-sm font-weight-bold">Créer une taille de velo</legend>
+
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Nom :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_taillevelo.nom, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'Nom'}})}}
+                    </div>
+                </div>
+                 <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Min :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_taillevelo.min, {'attr' : { 'class': 'form-control', 'placeholder':'Min'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Max :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_taillevelo.max, {'attr' : { 'class': 'form-control', 'placeholder':'Max'}})}}
+                    </div>
+                </div>
+
+                <br>
+                <button type="submit" class="btn btn-primary" style="float:right;">Submit <i class="icon-checkmark3 font-size-base mr-1"></i></button>
+            </fieldset>
+        </div>
+</div>
+</div>
+
+{{ form_end(form_taillevelo)}}
+</form>
+
+{% endblock %}
