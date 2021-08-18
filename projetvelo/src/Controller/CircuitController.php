@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Circuit;
 use App\Form\CircuitType;
+use Gedmo\Sluggable\Util\Urlizer;
 use App\Repository\CircuitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,12 +30,17 @@ class CircuitController extends AbstractController
      */
     public function delete(Request $request, $id) {
         $circuit = $this->getDoctrine()->getRepository(Circuit::class)->find($id);
-  
+        $sites = $circuit->getSite();
+        foreach($sites as $site){
+          $circuit->removeSite($site);
+        }
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($circuit);
         $entityManager->flush();
         $response = new Response();
         $response->send();
+
+        return $this->redirectToRoute('show_circuits');
       }
     /**
       * @Route("/Circuit/new", name="new_circuit")
@@ -43,10 +49,22 @@ class CircuitController extends AbstractController
         $circuit = new Circuit();
 
         $form = $this->createForm(CircuitType::class,$circuit);
+        $circuit->__construct();
         $form->handleRequest($request);
         
 
         if($form->isSubmitted() && $form->isValid()){
+          $uploadedFile = $form['image']->getData();
+          if ($uploadedFile) {
+              $destination = $this->getParameter('kernel.project_dir').'/public/uploads/circuit_image';
+              $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+              $newFilename = Urlizer::urlize($originalFilename).'-'.uniqid().'.'.$uploadedFile->guessExtension();
+              $uploadedFile->move(
+                  $destination,
+                  $newFilename
+              );
+            $circuit->setImage($newFilename);
+          }
             $manager->persist($circuit);
             $manager->flush();
 
@@ -75,9 +93,26 @@ class CircuitController extends AbstractController
 
       $form = $this->createForm(CircuitType::class,$circuit);
 
+      $sites = $circuit->getSite();
+      foreach($sites as $site){
+        $circuit->removeSite($site);
+      }
+     
+      $circuit->__construct(); 
       $form->handleRequest($request);
 
       if($form->isSubmitted() && $form->isValid()) {
+        $uploadedFile = $form['image']->getData();
+        if ($uploadedFile) {
+            $destination = $this->getParameter('kernel.project_dir').'/public/uploads/circuit_image';
+            $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $newFilename = Urlizer::urlize($originalFilename).'-'.uniqid().'.'.$uploadedFile->guessExtension();
+            $uploadedFile->move(
+                $destination,
+                $newFilename
+            );
+          $circuit->setImage($newFilename);
+        }
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();

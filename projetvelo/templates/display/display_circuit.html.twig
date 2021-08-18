@@ -31,17 +31,35 @@
                     </div></div>
                 </div>
                 <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Distance :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{circuit.distance}} KM
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Description :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{circuit.description}} 
+                    </div></div>
+                </div>
+                <div class="form-group row">
                     <label class="col-form-label col-lg-2">Image :</label>
                     <div class="col-lg-10">
                     <div class="form-control">
-                    {{circuit.image}}
+                    {% if circuit.image == null %}
+                        Pas d'image disponible.
+                    {% else %}
+                        <img style="width:20rem; height:11rem;" src="{{ circuit.displayPhoto }}">
+                    {% endif %}
                     </div></div>
                 </div>
                 <div class="form-group row">
                     <label class="col-form-label col-lg-2">Trajectoire :</label>
                     <div class="col-lg-10">
                     <div class="form-control">
-                    {{circuit.image}}
+                    {{circuit.trajectoire}}
                     </div></div>
                 </div>
                 <div class="form-group row">
@@ -55,7 +73,9 @@
                     <label class="col-form-label col-lg-2">Sites :</label>
                     <div class="col-lg-10">
                     <div class="form-control">
-                    
+                        {% for chaque in circuit.site %}
+								{{chaque.nom}} <br>
+							{% endfor %}
                     </div></div>
                 </div>
                 <br>

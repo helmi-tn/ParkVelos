@@ -29,13 +29,10 @@
 							<thead>
 								<tr class="bg-blue">
 									<th>#</th>
-									<th>Nom</th>
-									<th>Prenom</th>
-									<th>Email</th>
-                                    <th>CIN</th>
+									<th>Nombre de personnes</th>
                                     <th>Date de debut</th>
                                     <th>Date de fin</th>
-									<th>Nombre de personnes</th>
+                                    <th>Commentaire</th>
                                     <th></th>	
 								</tr>
 							</thead>
@@ -43,13 +40,10 @@
                             {% for commande in commandes %}
 								<tr>
 									<td>{{loop.index}}</td>
-									<td>{{commande.nom}}</td>
-									<td>{{commande.prenom}}</td>
-									<td>{{commande.email}}</td>
-                                    <td>{{commande.cin}}</td>
+									<td>{{commande.nbpersonnes}}</td>
 									<td>{{commande.debutdate|date("d/m/Y")}}</td>
                                     <td>{{commande.findate|date("d/m/Y")}}</td>
-									<td>{{commande.nbpersonnes}}</td>
+                                    <td>{{commande.commentaire}}</td>
                                     <td><a class="btn btn-light" href="{{path('display_commande',{'id':commande.id})}}">Show</a>&nbsp;<a class="btn btn-danger" href="#" data-toggle="modal" data-target="#modal_delete{{commande.id}}">Delete</a>
 									<a class="btn btn-dark" href="{{path('edit_commande',{'id':commande.id})}}">Edit</a></td>
 									
@@ -67,7 +61,7 @@
 
 								<h6 class="font-weight-semibold"><i class="icon-law mr-2"></i> Etes-vous sûr de supprimer cette commande ?</h6>
 								<br>
-								<p>Commande : {{commande.nom}}</p>
+								<p>Id : {{commande.id}}</p>
 
 							</div>
 

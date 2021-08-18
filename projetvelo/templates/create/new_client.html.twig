@@ -31,6 +31,24 @@
                         {{ form_widget(form_client.cin, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'cin'}})}}
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Email :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_client.email, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'Email'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Adresse :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_client.adresse, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'cin'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Telephone :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_client.telephone, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'Telephone'}})}}
+                    </div>
+                </div>
                 <br>
                 <button type="submit" class="btn btn-primary" style="float:right;">Submit <i class="icon-checkmark3 font-size-base mr-1"></i></button>
             </fieldset>

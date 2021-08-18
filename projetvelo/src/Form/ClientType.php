@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Client;
+use App\Entity\Commande;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ClientType extends AbstractType
@@ -15,6 +17,9 @@ class ClientType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('cin')
+            ->add('email')
+            ->add('adresse')
+            ->add('telephone')
         ;
     }
 

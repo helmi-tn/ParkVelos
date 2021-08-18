@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\VeloRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\VeloRepository;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=VeloRepository::class)
@@ -28,7 +31,7 @@ class Velo
     private $reference;
 
     /**
-     * @ORM\Column(type="blob", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $image;
 
@@ -41,6 +44,15 @@ class Velo
      * @ORM\ManyToOne(targetEntity=TailleVelo::class, inversedBy="velos")
      */
     private $taillevelo;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="velos")
+     * @ORM\JoinColumn(name="participant_id",referencedColumnName="id", nullable=true, onDelete="CASCADE")    
+     */
+    private $participant;
+
+ 
+
 
     public function getId(): ?int
     {
@@ -106,4 +118,26 @@ class Velo
 
         return $this;
     }
+
+
+    public function displayPhoto()
+    {
+        if($this->image !== null) {
+            $this->image = "../../uploads/velo_image/" . $this->getImage();
+            return $this->image;
+        }
+    }
+
+    public function getParticipant(): ?Participant
+    {
+        return $this->participant;
+    }
+
+    public function setParticipant(?Participant $participant): self
+    {
+        $this->participant = $participant;
+
+        return $this;
+    }
+
 }

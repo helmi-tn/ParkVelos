@@ -6,7 +6,7 @@
 
 {% block body %}
     <br><br><br>
-    {{ form_start(form_circuit)}}
+    {{ form_start(form_circuit,{'attr': {'novalidate': 'novalidate'}} )}}
     <div class="content">
     <div class="card">
         <div class="card-body">
@@ -34,25 +34,31 @@
                 <div class="form-group row">
                     <label class="col-form-label col-lg-2">Attribut :</label>
                     <div class="col-lg-10">
-                        {{ form_widget(form_circuit.attribut, {'attr' : {'class': 'form-control', 'placeholder':'Icon'}})}}
+                        {{ form_widget(form_circuit.attribut, {'attr' : {'class': 'form-control', 'placeholder':'Attribut'}})}}
+                    </div>
+                </div>
+                 <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Distance :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_circuit.distance, {'attr' : {'class': 'form-control', 'placeholder':'Distance'}})}}
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-form-label col-lg-2">Image :</label>
                     <div class="col-lg-10">
-                        {{ form_widget(form_circuit.image, {'attr' : {'class': 'form-control', 'placeholder':'Image'}})}}
+                        {{ form_widget(form_circuit.image, {'attr' : {'class': 'form-control-uniform', 'placeholder':'Image'}})}}
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-form-label col-lg-2">Trajectoire :</label>
                     <div class="col-lg-10">
-                        {{ form_widget(form_circuit.trajectoire, {'attr' : {'class': 'form-control', 'placeholder':'Trajectoire'}})}}
+                        {{ form_widget(form_circuit.trajectoire, {'attr' : {'class': 'form-control-uniform', 'placeholder':'Trajectoire'}})}}
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-form-label col-lg-2">Categorie :</label>
                     <div class="col-lg-10">
-                        {{ form_widget(form_circuit.categorie, {'attr' : {'class': 'form-control', 'placeholder':'Categorie','multiple' : 'multiple'}})}}
+                        {{ form_widget(form_circuit.categorie, {'attr' : { 'class': 'select2-selection select2-selection--single', 'style':'width:100%', 'placeholder':'Categorie'}})}}
                     </div>
                 </div>
                 <div class="form-group row">
@@ -63,7 +69,7 @@
                 </div>
                 <br>
                 <button type="submit" class="btn btn-success" style="float:right;">Modifier <i class="icon-checkmark3 font-size-base mr-1"></i></button>
-                <a href="{{path('show_circuits')}}"><button class="btn btn-primary" style="float:left;">Retourner <i class="icon-checkmark3 font-size-base mr-1"></i></button></a>
+                <a href="{{path('show_circuits')}}"><button class="btn btn-primary" style="float:left;">Retourner </button></a>
             </fieldset>
         </div>
 </div>

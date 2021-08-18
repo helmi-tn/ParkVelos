@@ -39,9 +39,15 @@ class TailleVelo
      */
     private $velos;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Participant::class, mappedBy="taillevelo")
+     */
+    private $participant;
+
     public function __construct()
     {
         $this->velos = new ArrayCollection();
+        $this->participant = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,6 +115,36 @@ class TailleVelo
             // set the owning side to null (unless already changed)
             if ($velo->getTaillevelo() === $this) {
                 $velo->setTaillevelo(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Participant[]
+     */
+    public function getParticipant(): Collection
+    {
+        return $this->participant;
+    }
+
+    public function addParticipant(Participant $participant): self
+    {
+        if (!$this->participant->contains($participant)) {
+            $this->participant[] = $participant;
+            $participant->setTaillevelo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant(Participant $participant): self
+    {
+        if ($this->participant->removeElement($participant)) {
+            // set the owning side to null (unless already changed)
+            if ($participant->getTaillevelo() === $this) {
+                $participant->setTaillevelo(null);
             }
         }
 

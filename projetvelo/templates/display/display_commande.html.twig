@@ -10,34 +10,6 @@
             <fieldset class="mb-3">
                 <legend class="text-uppercase font-size-sm font-weight-bold">Commande </legend>
                 <div class="form-group row">
-                    <label class="col-form-label col-lg-2">Nom :</label>
-                    <div class="col-lg-10">
-                    <div class="form-control">
-                    {{commande.nom}}
-                    </div></div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-form-label col-lg-2">Prenom :</label>
-                    <div class="col-lg-10">
-                    <div class="form-control">
-                    {{commande.prenom}}
-                    </div></div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-form-label col-lg-2">Email :</label>
-                    <div class="col-lg-10">
-                    <div class="form-control">
-                    {{commande.email}}
-                    </div></div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-form-label col-lg-2">CIN :</label>
-                    <div class="col-lg-10">
-                    <div class="form-control">
-                    {{commande.cin}}
-                    </div></div>
-                </div>
-                <div class="form-group row">
                     <label class="col-form-label col-lg-2">Nombre de personnes :</label>
                     <div class="col-lg-10">
                     <div class="form-control">
@@ -48,14 +20,14 @@
                     <label class="col-form-label col-lg-2">Date de debut :</label>
                     <div class="col-lg-10">
                     <div class="form-control">
-                    {{commande.debutdate|date("d/m/Y")}}
+                    {{commande.debutdate|date("d/m/Y H:m")}}
                     </div></div>
                 </div>
                 <div class="form-group row">
                     <label class="col-form-label col-lg-2">Date de fin :</label>
                     <div class="col-lg-10">
                     <div class="form-control">
-                    {{commande.findate|date("d/m/Y")}}
+                    {{commande.findate|date("d/m/Y H:m")}}
                     </div></div>
                 </div>
                 <div class="form-group row">
@@ -69,10 +41,84 @@
                     <label class="col-form-label col-lg-2">Date de creation :</label>
                     <div class="col-lg-10">
                     <div class="form-control">
-                    {{commande.createdAt|date("d/m/Y")}}
+                    {{commande.createdAt|date("d/m/Y H:m")}}
+                    </div></div>
+                </div>
+                <legend class="text-uppercase font-size-sm font-weight-bold">Client liée au commande</legend>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Nom :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{commande.client.nom}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Prenom :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{commande.client.prenom}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">CIN :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{commande.client.cin}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Email :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{commande.client.email}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Adresse :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{commande.client.adresse}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Telephone :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{commande.client.telephone}}
                     </div></div>
                 </div>
                 <br>
+                <legend class="text-uppercase font-size-sm font-weight-bold">Participants liée au commande</legend>
+                 {% for chaque in commande.participant %}
+                      <div class="form-group row">
+                        <label class="col-form-label col-lg-2">Nom et prenom :</label>
+                            <div class="col-lg-10">
+                                <div class="form-control">
+                                    {{chaque.nom}} {{chaque.prenom}}
+                                </div>
+                           </div>
+                        </div>
+                        <div class="form-group row">
+                        <label class="col-form-label col-lg-2">Velos :</label>
+                            <div class="col-lg-10">
+                                <div class="form-control">
+                                    {% for chaquevelo in chaque.velos %}
+                                        {{chaquevelo.reference}} <br>
+                                    {% endfor %}
+                                </div>
+                           </div>
+                        </div>
+                        <div class="form-group row">
+                        <label class="col-form-label col-lg-2">Taille de velo :</label>
+                            <div class="col-lg-10">
+                                <div class="form-control">
+                                    {{chaque.taillevelo.nom}}
+                                </div>
+                           </div>
+                        </div>
+                        <hr>
+                {% endfor %}
+                         
                 <a href="{{path('show_commandes')}}"><button type="button" class="btn btn-primary">Retourner</button></a>
             </fieldset>
         </div>

@@ -17,7 +17,8 @@ class VeloType extends AbstractType
         $builder
             ->add('type')
             ->add('reference')
-            ->add('image', FileType::class)
+            ->add('image', FileType::class, ['data_class' => null
+            ])
             ->add('disponibilite')
             ->add('taillevelo', EntityType::class, [
                 'class' => TailleVelo::class,

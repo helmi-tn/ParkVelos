@@ -4,7 +4,7 @@
 
 {% block body %}
     <br><br><br>
-    {{ form_start(form_circuit)}}
+     {{ form_start(form_circuit,{'attr': {'novalidate': 'novalidate'}} )}}
     <div class="content">
     <div class="card">
         <div class="card-body">
@@ -36,9 +36,33 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Distance :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_circuit.distance, {'attr' : {'required':'required' , 'class': 'form-control','placeholder':'Distance (Km)'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label class="col-form-label col-lg-2">Image :</label>
                     <div class="col-lg-10">
-                        {{ form_widget(form_circuit.image, {'attr' : {'required':'required' , 'class': 'form-control-plaintext', 'type':'file'}})}}
+                        {{ form_widget(form_circuit.image, {'attr' : {'class': 'form-control-uniform'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Trajectoire :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_circuit.trajectoire, {'attr' : {'class': 'form-control-uniform'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Categorie :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_circuit.categorie, {'attr' : {'required':'required' , 'class': 'select2-selection select2-selection--single', 'style':'width:100%'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Sites :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_circuit.site, {'attr' : { 'class': 'select2-selection select2-selection--single', 'style':'width:100%', 'multiple':'multiple'}})}}
                     </div>
                 </div>
 

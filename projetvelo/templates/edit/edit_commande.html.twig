@@ -6,37 +6,12 @@
 
 {% block body %}
     <br><br><br>
-    {{ form_start(form_commande)}}
+    {{ form_start(form_commande,{'attr': {'novalidate': 'novalidate'}} )}}
     <div class="content">
     <div class="card">
         <div class="card-body">
             <fieldset class="mb-3">
                 <legend class="text-uppercase font-size-sm font-weight-bold">Modifier une commande</legend>
-
-                <div class="form-group row">
-                    <label class="col-form-label col-lg-2">Nom :</label>
-                    <div class="col-lg-10">
-                        {{ form_widget(form_commande.nom, {'attr' : { 'class': 'form-control', 'placeholder':'Nom'}})}}
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-form-label col-lg-2">Prenom :</label>
-                    <div class="col-lg-10">
-                        {{ form_widget(form_commande.prenom, {'attr' : { 'class': 'form-control', 'placeholder':'Prenom'}})}}
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-form-label col-lg-2">Email :</label>
-                    <div class="col-lg-10">
-                        {{ form_widget(form_commande.email, {'attr' : {'class': 'form-control', 'placeholder':'Email'}})}}
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-form-label col-lg-2">CIN :</label>
-                    <div class="col-lg-10">
-                        {{ form_widget(form_commande.cin, {'attr' : {'class': 'form-control', 'placeholder':'CIN'}})}}
-                    </div>
-                </div>
                 <div class="form-group row">
                     <label class="col-form-label col-lg-2">Nombre de personnes :</label>
                     <div class="col-lg-10">
@@ -46,7 +21,7 @@
                 <div class="form-group row">
                     <label class="col-form-label col-lg-2">Date de debut :</label>
                     <div class="col-lg-10">
-                        {{ form_widget(form_commande.debutdate, {'attr' : {'class': 'form-control', 'placeholder':'Date de debut'}})}}
+                        {{ form_widget(form_commande.debutdate, {'attr' : {'class': 'form-control', 'placeholder':'Date de debut','type':'date'}})}}
                     </div>
                 </div>
                  <div class="form-group row">
@@ -61,15 +36,77 @@
                         {{ form_widget(form_commande.commentaire, {'attr' : {'class': 'form-control', 'placeholder':'Commentaire'}})}}
                     </div>
                 </div>
-                 <div class="form-group row">
-                    <label class="col-form-label col-lg-2">Créer le :</label>
+
+
+                <legend class="text-uppercase font-size-sm font-weight-bold">Le client liée au commande</legend>
+                  <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Nom :</label>
                     <div class="col-lg-10">
-                        {{ form_widget(form_commande.createdAt, {'attr' : {'class': 'form-control'}})}}
+                        {{ form_widget(form_commande.client.nom, {'attr' : { 'class': 'form-control', 'placeholder':'Nom'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Prenom :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_commande.client.prenom, {'attr' : { 'class': 'form-control', 'placeholder':'Prenom'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Email :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_commande.client.email, {'attr' : {'class': 'form-control', 'placeholder':'Email'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">CIN :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_commande.client.cin, {'attr' : {'class': 'form-control', 'placeholder':'CIN'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Adresse :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_commande.client.adresse, {'attr' : {'class': 'form-control', 'placeholder':'Adresse'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Telephone :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_commande.client.telephone, {'attr' : {'class': 'form-control', 'placeholder':'Telephone'}})}}
                     </div>
                 </div>
                 <br>
+                <legend class="text-uppercase font-size-sm font-weight-bold">Les participants liée au commande</legend>
+                {% for chaque in form_commande.participant %}
+                 <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Nom :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(chaque.nom, {'attr' : {'class': 'form-control'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Prenom :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(chaque.prenom, {'attr' : {'class': 'form-control'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Velos :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(chaque.velos, {'attr' : {'class': 'form-control'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Taille de velo :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(chaque.taillevelo, {'attr' : {'class': 'form-control'}})}}
+                    </div>
+                </div>
+                <br>
+                <hr>
+                {% endfor %}
                 <button type="submit" class="btn btn-success" style="float:right;">Modifier <i class="icon-checkmark3 font-size-base mr-1"></i></button>
-                <a href="{{path('show_commandes')}}"><button class="btn btn-primary" style="float:left;">Retourner <i class="icon-checkmark3 font-size-base mr-1"></i></button></a>
+                <a href="{{path('show_commandes')}}"><button class="btn btn-primary" style="float:left;">Retourner </i></button></a>
             </fieldset>
         </div>
 </div>

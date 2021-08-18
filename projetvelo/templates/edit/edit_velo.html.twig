@@ -6,7 +6,7 @@
 
 {% block body %}
     <br><br><br>
-    {{ form_start(form_velo)}}
+    {{ form_start(form_velo,{'attr': {'novalidate': 'novalidate'}} )}}
     <div class="content">
     <div class="card">
         <div class="card-body">
@@ -28,7 +28,7 @@
                 <div class="form-group row">
                     <label class="col-form-label col-lg-2">Image :</label>
                     <div class="col-lg-10">
-                        {{ form_widget(form_velo.image, {'attr' : {'class': 'form-control'}})}}
+                        {{ form_widget(form_velo.image, {'attr' : {'class': 'form-control-uniform','onchange':'longblob'}})}}
                     </div>
                 </div>
                 <div class="form-group row">
@@ -40,12 +40,12 @@
                 <div class="form-group row">
                     <label class="col-form-label col-lg-2">Taille :</label>
                     <div class="col-lg-10">
-                        {{ form_widget(form_velo.taillevelo, {'attr' : {'class': 'form-control', 'placeholder':'Categorie', 'multiple':'multiple'}})}}
+                        {{ form_widget(form_velo.taillevelo, {'attr' : { 'class': 'select2-selection select2-selection--single', 'style':'width:100%', 'placeholder':'Categorie'}})}}
                     </div>
                 </div>
                 <br>
                 <button type="submit" class="btn btn-success" style="float:right;">Modifier <i class="icon-checkmark3 font-size-base mr-1"></i></button>
-                <a href="{{path('show_velos')}}"><button class="btn btn-primary" style="float:left;">Retourner <i class="icon-checkmark3 font-size-base mr-1"></i></button></a>
+                <a href="{{path('show_velos')}}"><button class="btn btn-primary" style="float:left;">Retourner </button></a>
             </fieldset>
         </div>
 </div>

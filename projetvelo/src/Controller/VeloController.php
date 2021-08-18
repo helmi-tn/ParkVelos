@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Gedmo\Sluggable\Util\Urlizer;
 use App\Entity\Velo;
 use App\Form\VeloType;
 use App\Repository\VeloRepository;
@@ -11,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class VeloController extends AbstractController
 {
@@ -35,6 +37,8 @@ class VeloController extends AbstractController
   
         $response = new Response();
         $response->send();
+
+        return $this->redirectToRoute('show_velos');
       }
       /**
       * @Route("/velo/new", name="new_velo")
@@ -47,6 +51,17 @@ class VeloController extends AbstractController
         
 
         if($form->isSubmitted() && $form->isValid()){
+          $uploadedFile = $form['image']->getData();
+          if ($uploadedFile) {
+              $destination = $this->getParameter('kernel.project_dir').'/public/uploads/velo_image';
+              $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+              $newFilename = Urlizer::urlize($originalFilename).'-'.uniqid().'.'.$uploadedFile->guessExtension();
+              $uploadedFile->move(
+                  $destination,
+                  $newFilename
+              );
+            $velo->setImage($newFilename);
+          }
             $manager->persist($velo);
             $manager->flush();
 
@@ -78,6 +93,17 @@ class VeloController extends AbstractController
         $form->handleRequest($request);
   
         if($form->isSubmitted() && $form->isValid()) {
+          $uploadedFile = $form['image']->getData();
+          if ($uploadedFile) {
+              $destination = $this->getParameter('kernel.project_dir').'/public/uploads/velo_image';
+              $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+              $newFilename = Urlizer::urlize($originalFilename).'-'.uniqid().'.'.$uploadedFile->guessExtension();
+              $uploadedFile->move(
+                  $destination,
+                  $newFilename
+              );
+            $velo->setImage($newFilename);
+          }
   
           $entityManager = $this->getDoctrine()->getManager();
           $entityManager->flush();

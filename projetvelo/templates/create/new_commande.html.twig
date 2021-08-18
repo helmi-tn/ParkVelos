@@ -2,39 +2,109 @@
 
 {% block title %}New commande{% endblock %}
 
+{% block javascripts %}
+<script src="{{asset('build/global_assets/js/plugins/ui/ripple.min.js')}}"></script>
+<script type="text/javascript">
+// add row
+var $addReponseLink = $('<br><a href="#" class="add_reponse_link btn btn-primary"> Ajouter un participant <i class="glyphicon glyphicon-plus"></i></a>');
+var $newLinkLiExp = $('<span></span>').append($addReponseLink);
+
+    ///Add Reponse:
+
+    jQuery(document).ready(function () {
+        // Get the ul that holds the collection of sections
+        var $collectionHolder = $('div.reponses');
+
+        // add the "add a section" anchor and li to the sections ul
+        $collectionHolder.append($newLinkLiExp);
+
+
+        // count the current form inputs we have (e.g. 2), use that as the new
+        // index when inserting a new item (e.g. 2)
+        $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+        $addReponseLink.on('click', function (e) {
+            // prevent the link from creating a "#" on the URL
+            e.preventDefault();
+
+            // add a new section form (see code block below)
+            addReponseForm($collectionHolder, $newLinkLiExp);
+            $("[type='checkbox']").bootstrapSwitch();
+        });
+
+
+    });
+
+    /// Add Reponse Form
+
+    function addReponseForm($collectionHolder, $newLinkLiExp) {
+        // Get the data-prototype explained earlier
+        var prototype = $collectionHolder.data('prototype');
+
+        // get the new index
+        var index = $collectionHolder.data('index');
+
+        // Replace '$$name$$' in the prototype's HTML to
+        // instead be a number based on how many items we have
+        var newFormExp = prototype.replace(/__name__/g, index);
+
+        // increase the index with one for the next item
+        $collectionHolder.data('index', index + 1);
+
+        // Display the form in the page in an li, before the "Add a section" link li
+        var $newFormLiExp = $('<span></span>').append(newFormExp);
+
+
+        $newLinkLiExp.before($newFormLiExp);
+       $(".summernotetext").summernote();
+
+        // handle the removal, just for this example
+        $('.remove-reponse').click(function (e) {
+            e.preventDefault();
+
+            $(this).parent().remove();
+
+            return false;
+        });
+    }
+</script>
+{% endblock %}
+
 {% block body %}
     <br><br><br>
+    {{ form_start(form_passerdate)}}
+        <div class="content">
+            <div class="card">
+                <div class="card-body">
+                    <fieldset class="mb-3">
+                        <legend class="text-uppercase font-size-l font-weight-bold">Passer une commande</legend>
+                        <div class="font-weight-semibold" style="margin-top:0.7rem;"> Veuillez indiquer la date de debut et la date de fin de vote reservation :</div>
+                        <br><br>
+                        <div class="form-group row">
+                            <label class="col-form-label col-lg-2">Date de debut :</label>
+                            <div class="col-lg-10">
+                                {{ form_widget(form_passerdate.debutdate)}}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-lg-2">Date de fin :</label>
+                            <div class="col-lg-10">
+                                {{ form_widget(form_passerdate.findate)}}
+                            </div>
+                        </div>
+                        <br>
+                        <a href="{{ path('new_commande') }}"><button type="submit" class="btn btn-success" style="float:right;">Valider <i class="icon-checkmark3 font-size-base mr-1"></i></button></a>
+                </div>
+            </div>
+        </div>
+{{ form_end(form_passerdate)}}
+
     {{ form_start(form_commande,{'attr': {'novalidate': 'novalidate'}} )}}
     <div class="content">
     <div class="card">
         <div class="card-body">
             <fieldset class="mb-3">
                 <legend class="text-uppercase font-size-sm font-weight-bold">Créer une commande</legend>
-
-                <div class="form-group row">
-                    <label class="col-form-label col-lg-2">Nom :</label>
-                    <div class="col-lg-10">
-                        {{ form_widget(form_commande.nom, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'Nom'}})}}
-                    </div>
-                </div>
-                 <div class="form-group row">
-                    <label class="col-form-label col-lg-2">Prenom :</label>
-                    <div class="col-lg-10">
-                        {{ form_widget(form_commande.prenom, {'attr' : { 'class': 'form-control', 'placeholder':'Prenom'}})}}
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-form-label col-lg-2">Email :</label>
-                    <div class="col-lg-10">
-                        {{ form_widget(form_commande.email, {'attr' : { 'class': 'form-control', 'placeholder':'Email'}})}}
-                    </div>
-                </div>
-                 <div class="form-group row">
-                    <label class="col-form-label col-lg-2">CIN :</label>
-                    <div class="col-lg-10">
-                        {{ form_widget(form_commande.cin, {'attr' : {'class': 'form-control', 'placeholder':'CIN'}})}}
-                    </div>
-                </div>
                 <div class="form-group row">
                     <label class="col-form-label col-lg-2">Nombre de personnes :</label>
                     <div class="col-lg-10">
@@ -59,7 +129,7 @@
                         {{ form_widget(form_commande.commentaire, {'attr' : {'class': 'form-control', 'placeholder':'Commentaire'}})}}
                     </div>
                 </div>
-                <p class="text-uppercase font-size-sm font-weight-bold">Client</p>
+                <legend class="required text-uppercase font-size-sm font-weight-bold" style="margin-left:0.3rem;">Client</legend>
                 <div class="form-group row">
                     <label class="col-form-label col-lg-2">Nom :</label>
                     <div class="col-lg-10">
@@ -78,14 +148,94 @@
                         {{ form_widget(form_commande.client.cin, {'attr' : {'class': 'form-control', 'placeholder':'CIN'}})}}
                     </div>
                 </div>
-                    <div class="col-lg-10" style="display:none;">
-                        {{ form_widget(form_commande.createdAt, {'attr' : {'class': 'form-control', 'placeholder':'Commentaire'}})}}
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Email :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_commande.client.email, {'attr' : {'class': 'form-control', 'placeholder':'Email'}})}}
                     </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Adresse :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_commande.client.adresse, {'attr' : {'class': 'form-control', 'placeholder':'Adresse'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Telephone :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_commande.client.telephone, {'attr' : {'class': 'form-control', 'placeholder':'Telephone'}})}}
+                    </div>
+                </div>
+
+
                 <br>
-                <button type="submit" class="btn btn-primary" style="float:right;">Submit <i class="icon-checkmark3 font-size-base mr-1"></i></button>
             </fieldset>
         </div>
 </div>
+
+                {% macro information_prototype(form_commande) %}
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+                <div class="card-body">
+                    <fieldset class="mb-3">
+                        <legend class="text-uppercase font-size-sm font-weight-bold">Ajouter un participant</legend>
+                        <div class="form-group row">
+                            <label class="col-form-label col-lg-2">Nom :</label>
+                            <div class="col-lg-10">
+                                {{ form_widget(form_commande.nom, {'attr' : {'class': 'form-control'}})}}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-lg-2">Prenom :</label>
+                            <div class="col-lg-10">
+                                {{ form_widget(form_commande.prenom, {'attr' : {'class': 'form-control'}})}}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-lg-2">Velos :</label>
+                            <div class="col-lg-10">
+                                {{ form_widget(form_commande.velos, {'attr' : {'class': 'form-control'}})}}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-lg-2">Taille de velo :</label>
+                            <div class="col-lg-10">
+                                {{ form_widget(form_commande.taillevelo, {'attr' : {'class': 'form-control'}})}}
+                            </div>
+                        </div>
+            </div>
+        </div>
+    </div>  
+    <div class="col-lg-6">
+        <div class="card">
+                <div class="card-body">
+                    <fieldset class="mb-3">
+                        <legend class="text-uppercase font-size-sm font-weight-bold">La liste des vélos</legend>
+                        <div>Veuillez choisir vos vélos</div>
+
+                            <div class="row">
+                                <div class="col-sm-6 col-lg-3">
+                                    <div class="card">
+                                        <img src="" >
+                                    </div>
+                                </div>
+                            </div>
+
+                                        
+                </div>
+        </div>
+    </div>
+    
+            {% endmacro %}
+            <div class="reponses"  data-prototype="{{ _self.information_prototype(form_commande.participant.vars.prototype)|e }}">
+                    {% for reponse in form_commande.participant %}
+                        {{ _self.information_prototype(form_commande) }}
+                    {% endfor %}
+                </div>
+                <button type="submit" class="btn btn-success" style="float:right;">Réserver <i class="icon-checkmark3 font-size-base mr-1"></i></button>
+                
+
 </div>
 
 {{ form_end(form_commande)}}

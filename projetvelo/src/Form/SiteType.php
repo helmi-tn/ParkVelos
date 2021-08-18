@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class SiteType extends AbstractType
 {
@@ -18,16 +19,13 @@ class SiteType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('icon', FileType::class)
+            ->add('icon', FileType::class, ['data_class' => null])
             ->add('description', TextAreaType::class)
-            ->add('map',FileType::class)
+            ->add('map',FileType::class, ['data_class' => null])
             ->add('categoriesite', EntityType::class, [
                 'class' => CategorieSite::class,
                 'choice_label' => 'nom', ])
-
-            /*->add('circuit', EntityType::class, [
-                'class' => Circuit::class,
-                'choice_label' => 'nom', ])*/
+            ->add('image', FileType::class, ['data_class' => null])
             
         ;
     }

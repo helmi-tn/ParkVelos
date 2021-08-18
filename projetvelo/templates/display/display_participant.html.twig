@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Participant{% endblock %}
+
+{% block body %}
+<br><br><br>
+ <div class="content">
+    <div class="card">
+        <div class="card-body">
+            <fieldset class="mb-3">
+                <legend class="text-uppercase font-size-sm font-weight-bold">Participant </legend>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Nom :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{participant.nom}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Prenom :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{participant.prenom}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Velos :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                        	{% for chaque in participant.velos %}
+								{{chaque.reference}} <br>
+							{% endfor %}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Taille :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{participant.taillevelo.nom}}
+                    </div></div>
+                </div>
+                <br>
+                <a href="{{path('show_participants')}}"><button type="button" class="btn btn-primary">Retourner</button></a>
+            </fieldset>
+        </div>
+</div>
+</div>
+{% endblock %}

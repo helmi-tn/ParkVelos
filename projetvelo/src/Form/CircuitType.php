@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class CircuitType extends AbstractType
@@ -22,13 +23,16 @@ class CircuitType extends AbstractType
             ->add('description',TextAreaType::class)
             ->add('attribut')
             ->add('image', FileType::class, ['data_class' => null])
-            ->add('trajectoire', FileType::class)
+            ->add('distance', NumberType::class)
+            ->add('trajectoire', FileType::class, ['data_class' => null , 'required' => false
+            ])
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,
                 'choice_label' => 'nom', ])
             ->add('site', EntityType::class, [
                 'class' => Site::class,
                 'choice_label'=> 'nom',
+                'multiple'=> 'true',
             ])
 
         ;

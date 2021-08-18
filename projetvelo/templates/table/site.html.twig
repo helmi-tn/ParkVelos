@@ -34,9 +34,7 @@
 									<th>Nom</th>
 									<th>Icon</th>
 									<th>Description</th>
-                                    <th>Map</th>
-                                    <th>Catégorie</th>
-									<th>Circuits</th>	
+                                    <th>Catégorie</th>	
 									<th></th>
 								</tr>
 							</thead>
@@ -47,9 +45,7 @@
 									<td>{{site.nom}}</td>
 									<td>{{site.icon}}</td>
 									<td>{{site.description}}</td>
-                                    <td>{{site.map}}</td>
 									<td>{{site.categoriesite.nom}}</td>
-									<td></td>
 									<td><a class="btn btn-light" href="{{path('display_site',{'id':site.id})}}">Show</a>&nbsp;<a class="btn btn-danger" href="#" data-toggle="modal" data-target="#modal_delete{{site.id}}">Delete</a>
 									<a class="btn btn-dark" href="{{path('edit_site',{'id':site.id})}}">Edit</a></td>
 								</tr>

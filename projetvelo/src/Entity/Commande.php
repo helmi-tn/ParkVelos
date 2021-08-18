@@ -20,16 +20,6 @@ class Commande
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $nom;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $prenom;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $nbpersonnes;
@@ -40,18 +30,13 @@ class Commande
     private $commentaire;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime")
      */
     private $debutdate;
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime")
      */
     private $findate;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $cin;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -61,45 +46,28 @@ class Commande
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
+    private $status='nonvalide';
 
     /**
-     * @ORM\OneToMany(targetEntity=Client::class, mappedBy="commande")
+     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="client",cascade={"persist"})
      */
     private $client;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Participant::class, inversedBy="commandes" ,  cascade={"persist"})
+     */
+    private $participant;
+
+    
+
     public function __construct()
     {
-        $this->client = new ArrayCollection();
+        $this->participant = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(string $nom): self
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(string $prenom): self
-    {
-        $this->prenom = $prenom;
-
-        return $this;
     }
 
     public function getNbpersonnes(): ?int
@@ -126,37 +94,25 @@ class Commande
         return $this;
     }
 
-    public function getDebutdate(): ?\DateTimeImmutable
+    public function getDebutdate(): ?\DateTime
     {
         return $this->debutdate;
     }
 
-    public function setDebutdate(?\DateTimeImmutable $debutdate): self
+    public function setDebutdate(?\DateTime $debutdate): self
     {
         $this->debutdate = $debutdate;
 
         return $this;
     }
-    public function getFindate(): ?\DateTimeImmutable
+    public function getFindate(): ?\DateTime
     {
         return $this->findate;
     }
 
-    public function setFindate(?\DateTimeImmutable $findate): self
+    public function setFindate(?\DateTime $findate): self
     {
         $this->findate = $findate;
-
-        return $this;
-    }
-
-    public function getCin(): ?int
-    {
-        return $this->cin;
-    }
-
-    public function setCin(int $cin): self
-    {
-        $this->cin = $cin;
 
         return $this;
     }
@@ -173,44 +129,51 @@ class Commande
         return $this;
     }
 
-    public function getEmail(): ?string
+
+    public function getStatus(): ?string
     {
-        return $this->email;
+        return $this->status;
     }
 
-    public function setEmail(string $email): self
+    public function setStatus(string $status): self
     {
-        $this->email = $email;
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }
 
     /**
-     * @return Collection|Client[]
+     * @return Collection|Participant[]
      */
-    public function getClient(): Collection
+    public function getParticipant(): Collection
     {
-        return $this->client;
+        return $this->participant;
     }
 
-    public function addClient(Client $client): self
+    public function addParticipant(Participant $participant): self
     {
-        if (!$this->client->contains($client)) {
-            $this->client[] = $client;
-            $client->setCommande($this);
+        if (!$this->participant->contains($participant)) {
+            $this->participant[] = $participant;
         }
 
         return $this;
     }
 
-    public function removeClient(Client $client): self
+    public function removeParticipant(Participant $participant): self
     {
-        if ($this->client->removeElement($client)) {
-            // set the owning side to null (unless already changed)
-            if ($client->getCommande() === $this) {
-                $client->setCommande(null);
-            }
-        }
+        $this->participant->removeElement($participant);
 
         return $this;
     }

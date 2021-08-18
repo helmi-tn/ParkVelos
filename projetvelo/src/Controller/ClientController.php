@@ -36,6 +36,8 @@ class ClientController extends AbstractController
   
         $response = new Response();
         $response->send();
+
+        return $this->redirectToRoute('show_clients');
       }
       /**
       * @Route("/client/new", name="new_client")

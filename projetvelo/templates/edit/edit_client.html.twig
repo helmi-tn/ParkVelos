@@ -6,7 +6,7 @@
 
 {% block body %}
     <br><br><br>
-    {{ form_start(form_client)}}
+    {{ form_start(form_client,{'attr': {'novalidate': 'novalidate'}} )}}
     <div class="content">
     <div class="card">
         <div class="card-body">
@@ -31,9 +31,30 @@
                         {{ form_widget(form_client.cin, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'CIN'}})}}
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Email :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_client.email, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'Email'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Adresse :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_client.adresse, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'Adresse'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Telephone :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_client.telephone, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'Telephone'}})}}
+                    </div>
+                </div>
+                
+                
+                
                 <br>
                 <button type="submit" class="btn btn-success" style="float:right;">Modifier <i class="icon-checkmark3 font-size-base mr-1"></i></button>
-                <a href="{{path('show_clients')}}"><button class="btn btn-primary" style="float:left;">Retourner <i class="icon-checkmark3 font-size-base mr-1"></i></button></a>
+                <a href="{{path('show_clients')}}"><button class="btn btn-primary" style="float:left;">Retourner </button></a>
             </fieldset>
         </div>
 </div>

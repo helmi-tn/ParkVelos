@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\SiteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SiteRepository::class)
@@ -51,6 +52,11 @@ class Site
      * @ORM\JoinColumn(nullable=false)
      */
     private $categoriesite;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $image;
 
     public function getId(): ?int
     {
@@ -128,4 +134,23 @@ class Site
 
         return $this;
     }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+    public function displayPhoto()
+    {
+        if($this->image !== null) {
+            $this->image = "../../uploads/site_image/" . $this->getImage();
+            return $this->image;
+        }
+    }   
 }

@@ -4,7 +4,7 @@
 
 {% block body %}
     <br><br><br>
-    {{ form_start(form_site)}}
+   {{ form_start(form_site,{'attr': {'novalidate': 'novalidate'}} )}}
     <div class="content">
     <div class="card">
         <div class="card-body">
@@ -26,13 +26,25 @@
                 <div class="form-group row">
                     <label class="col-form-label col-lg-2">Map :</label>
                     <div class="col-lg-10">
-                        {{ form_widget(form_site.map, {'attr' : { 'class': 'form-control', 'placeholder':'Map'}})}}
+                        {{ form_widget(form_site.map, {'attr' : { 'class': 'form-control-uniform', 'placeholder':'Map'}})}}
                     </div>
                 </div>
                  <div class="form-group row">
                     <label class="col-form-label col-lg-2">Icon :</label>
                     <div class="col-lg-10">
-                        {{ form_widget(form_site.icon, {'attr' : {'class': 'form-control', 'placeholder':'Icon'}})}}
+                        {{ form_widget(form_site.icon, {'attr' : {'class': 'form-control-uniform', 'placeholder':'Icon'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Image :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_site.image, {'attr' : {'class': 'form-control-uniform', 'placeholder':'Icon'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Categorie :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_site.categoriesite, {'attr' : {'class': 'form-control'}})}}
                     </div>
                 </div>
 

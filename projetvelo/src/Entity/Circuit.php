@@ -6,6 +6,7 @@ use App\Repository\CircuitRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CircuitRepository::class)
@@ -42,7 +43,7 @@ class Circuit
     private $attribut;
 
     /**
-     * @ORM\Column(type="blob",nullable=true)
+     * @ORM\Column(type="string",nullable=true)
      */
     private $image;
 
@@ -61,6 +62,11 @@ class Circuit
      * @ORM\ManyToMany(targetEntity=Site::class, mappedBy="circuit")
      */
     private $site;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $distance;
 
     public function __construct()
     {
@@ -185,4 +191,25 @@ class Circuit
 
         return $this;
     }
+
+    public function getDistance(): ?float
+    {
+        return $this->distance;
+    }
+
+    public function setDistance(float $distance): self
+    {
+        $this->distance = $distance;
+
+        return $this;
+    }
+
+
+    public function displayPhoto()
+    {
+        if($this->image !== null) {
+            $this->image = "../../uploads/circuit_image/" . $this->getImage();
+            return $this->image;
+        }
+    }   
 }

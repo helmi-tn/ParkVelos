@@ -64,6 +64,8 @@ class CategorieSiteController extends AbstractController
         $entityManager->flush();
         $response = new Response();
         $response->send();
+
+        return $this->redirectToRoute('show_categoriesite');
       }
     /**
      * @Route("/CategorieSite/display/{id}", name="display_categ_site")

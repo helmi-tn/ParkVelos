@@ -36,6 +36,8 @@ class TailleVeloController extends AbstractController
   
         $response = new Response();
         $response->send();
+
+        return $this->redirectToRoute('show_taillevelos');
       }
        /**
       * @Route("/taillevelo/new", name="new_taillevelo")
@@ -82,7 +84,7 @@ class TailleVeloController extends AbstractController
           $entityManager = $this->getDoctrine()->getManager();
           $entityManager->flush();
   
-          return $this->redirectToRoute('show_taillesvelos');
+          return $this->redirectToRoute('show_taillevelos');
         }
   
         return $this->render('edit/edit_taillevelo.html.twig', [

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Site;
 use App\Form\SiteType;
+use Gedmo\Sluggable\Util\Urlizer;
 use App\Repository\SiteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,6 +36,8 @@ class SiteController extends AbstractController
   
         $response = new Response();
         $response->send();
+
+        return $this->redirectToRoute('show_sites');
       }
       /**
       * @Route("/site/new", name="new_site")
@@ -47,10 +50,21 @@ class SiteController extends AbstractController
         
 
         if($form->isSubmitted() && $form->isValid()){
+          $uploadedFile = $form['image']->getData();
+          if ($uploadedFile) {
+              $destination = $this->getParameter('kernel.project_dir').'/public/uploads/site_image';
+              $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+              $newFilename = Urlizer::urlize($originalFilename).'-'.uniqid().'.'.$uploadedFile->guessExtension();
+              $uploadedFile->move(
+                  $destination,
+                  $newFilename
+              );
+            $site->setImage($newFilename);
+          }
             $manager->persist($site);
             $manager->flush();
 
-            return $this->redirectToRoute('show_site');
+            return $this->redirectToRoute('show_sites');
         }
 
         return $this->render('create/new_site.html.twig', [
@@ -78,6 +92,17 @@ class SiteController extends AbstractController
       $form->handleRequest($request);
 
       if($form->isSubmitted() && $form->isValid()) {
+        $uploadedFile = $form['image']->getData();
+        if ($uploadedFile) {
+            $destination = $this->getParameter('kernel.project_dir').'/public/uploads/site_image';
+            $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $newFilename = Urlizer::urlize($originalFilename).'-'.uniqid().'.'.$uploadedFile->guessExtension();
+            $uploadedFile->move(
+                $destination,
+                $newFilename
+            );
+          $site->setImage($newFilename);
+        }
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();

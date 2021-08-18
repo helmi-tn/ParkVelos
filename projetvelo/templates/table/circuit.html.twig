@@ -33,10 +33,10 @@
 									<th>Nom</th>
 									<th>Difficulté</th>
 									<th>Attribut</th>
-                                    <th>Image</th>
-                                    <th>Trajectoire</th>
                                     <th>Catégorie</th>
-                                    <th>Sites</th>
+									<th>Distance</th>
+									<th>Sites</th>
+									<th></th>
 									<th></th>
 									<th></th>
 								</tr>
@@ -48,9 +48,13 @@
 									<td>{{circuit.nom}}</td>
 									<td>{{circuit.difficulte}}</td>
 									<td>{{circuit.attribut}}</td>
-                                    <td>{{circuit.image}}</td>
-									<td>{{circuit.trajectoire}}</td>
                                     <td>{{circuit.categorie.nom}}</td>
+									<td>{{circuit.distance}}</td>
+									<td>
+										{% for chaque in circuit.site %}
+											{{chaque.nom}} <br>
+										{% endfor %}
+									</td>
 									<td><td>
                                     <td><a class="btn btn-light" href="{{path('display_circuit',{'id':circuit.id})}}">Show</a>&nbsp;<a class="btn btn-danger" href="#" data-toggle="modal" data-target="#modal_delete{{circuit.id}}">Delete</a>
 									<a class="btn btn-dark" href="{{path('edit_circuit',{'id':circuit.id})}}" >Edit</a></td></td>

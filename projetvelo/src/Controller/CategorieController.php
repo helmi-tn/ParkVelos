@@ -37,6 +37,8 @@ class CategorieController extends AbstractController
   
         $response = new Response();
         $response->send();
+
+        return $this->redirectToRoute('show_categoriescircuits');
       }
        /**
       * @Route("/CategorieCircuit/new", name="new_categorie_circuit")
