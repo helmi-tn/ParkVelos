@@ -10,13 +10,6 @@
             <fieldset class="mb-3">
                 <legend class="text-uppercase font-size-sm font-weight-bold">Commande </legend>
                 <div class="form-group row">
-                    <label class="col-form-label col-lg-2">Nombre de personnes :</label>
-                    <div class="col-lg-10">
-                    <div class="form-control">
-                    {{commande.nbpersonnes}}
-                    </div></div>
-                </div>
-                <div class="form-group row">
                     <label class="col-form-label col-lg-2">Date de debut :</label>
                     <div class="col-lg-10">
                     <div class="form-control">
@@ -101,13 +94,67 @@
                         <div class="form-group row">
                         <label class="col-form-label col-lg-2">Velos :</label>
                             <div class="col-lg-10">
-                                <div class="form-control">
-                                    {% for chaquevelo in chaque.velos %}
-                                        {{chaquevelo.reference}} <br>
-                                    {% endfor %}
+                               <a href="#" data-toggle="modal" data-target="#modal_show{{chaque.id}}"> <div class="form-control">  
+                                        {{chaque.velo.reference}} (Clickez pour plus d'information) </a><br>
                                 </div>
                            </div>
                         </div>
+                         <!-- Iconified modal -->
+									<div id="modal_show{{chaque.id}}" class="modal fade" tabindex="-1">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header bg-info">
+													<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;Velo</h5>
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+												</div>
+
+												<div class="modal-body">
+
+													<h6 class="font-weight-semibold"><i class="icon-law mr-2"></i>Plus d'information sur cette velo</h6>
+													<br>
+													<div class="form-group row">
+                                                        <label class="col-form-label col-lg-2">Type :</label>
+                                                        <div class="col-lg-10">
+                                                        <div class="form-control">
+                                                        {{chaque.velo.type}}
+                                                        </div></div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-form-label col-lg-2">Reference :</label>
+                                                        <div class="col-lg-10">
+                                                        <div class="form-control">
+                                                        {{chaque.velo.reference}}
+                                                        </div></div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-form-label col-lg-2">Taille :</label>
+                                                        <div class="col-lg-10">
+                                                        <div class="form-control">
+                                                        {{chaque.velo.taillevelo.nom}}
+                                                        </div></div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-form-label col-lg-2">Image :</label>
+                                                        <div class="col-lg-10">
+                                                        <div class="form-control">
+                                                        {% if chaque.velo.image == null %}
+                                                            Pas d'image disponible.
+                                                        {% else %}
+                                                            <img style="width:20rem; height:11rem;" src="{{ chaque.velo.displayPhoto }}">
+                                                        {% endif %}
+                                                        </div></div>
+                                                    </div>
+
+												</div>
+
+												<div class="modal-footer">
+													<button class="btn btn-link info" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> Fermer</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								<!-- /iconified modal -->
+                    
                         <div class="form-group row">
                         <label class="col-form-label col-lg-2">Taille de velo :</label>
                             <div class="col-lg-10">

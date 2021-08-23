@@ -2,6 +2,10 @@
 
 {% block title %}Modifier un site{% endblock %}
 
+{% block javascripts %}
+<script src="{{asset('build/global_assets/js/plugins/extensions/jquery_ui/interactions.min.js')}}"></script>
+<script src="{{asset('build/global_assets/js/demo_pages/form_select2.js')}}"></script>
+{% endblock %}
 
 
 {% block body %}
@@ -46,7 +50,7 @@
                 <div class="form-group row">
                     <label class="col-form-label col-lg-2">Categorie :</label>
                     <div class="col-lg-10">
-                        {{ form_widget(form_site.categoriesite, {'attr' : { 'class': 'select2-selection select2-selection--single', 'style':'width:100%', 'placeholder':'Categorie'}})}}
+                        {{ form_widget(form_site.categoriesite, {'attr' : { 'class': 'select2-selection select2-selection--single', 'placeholder':'Categorie'}})}}
                     </div>
                 </div>
                 <br>

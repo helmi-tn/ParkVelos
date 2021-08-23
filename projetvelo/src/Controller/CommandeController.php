@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 
+use App\Entity\Velo;
 use DateTimeImmutable;
 use App\Entity\Commande;
 use App\Form\CommandeType;
+use App\Repository\VeloRepository;
 use App\Form\PasserDateCommandeType;
 use App\Repository\CommandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -41,39 +43,7 @@ class CommandeController extends AbstractController
 
         return $this->redirectToRoute('show_commandes');
       }
-      /**
-      * @Route("/commande/new", name="new_commande")
-      */
-      public function new(Request $request, EntityManagerInterface $manager){
-        $passerdate = null;
-
-        $form_passerdate = $this->createForm(PasserDateCommandeType::class,$passerdate);
-        $form_passerdate->handleRequest($request);
-        
-
-        if($form_passerdate->isSubmitted() && $form_passerdate->isValid()){
-            return $this->redirectToRoute('new_commande');
-        }
-
-        $commande = new Commande();
-
-        $form = $this->createForm(CommandeType::class,$commande);
-        $commande->__construct();
-        $form->handleRequest($request);
-        
-
-        if($form->isSubmitted() && $form->isValid()){
-            $commande->setCreatedAt(new \DateTimeImmutable());
-            $manager->persist($commande);
-            $manager->flush();
-
-            return $this->redirectToRoute('show_commandes');
-        }
-
-        return $this->render('create/new_commande.html.twig', [
-            'form_commande' => $form->createView(),'form_passerdate' => $form_passerdate->createView()
-        ]);
-      }
+   
     /**
      * @Route("/commande/display/{id}", name="display_commande")
      */
@@ -108,19 +78,55 @@ class CommandeController extends AbstractController
       }
 
       /**
-       * @Route("commande/date/passer", name="passer_commande_date")
+       * @Route("commande/date/passer", name="new_commande")
        */
-      public function passercommande(Request $request) : Response 
+      public function passercommande(Request $request,VeloRepository $repo) : Response 
       {
         $passerdate = null;
+        $entityManager = $this->getDoctrine()->getManager();
 
         $form_passerdate = $this->createForm(PasserDateCommandeType::class,$passerdate);
         $form_passerdate->handleRequest($request);
         
-
+        $lesvelos = $repo->findAll();
+        
+        $commande = new Commande();
         if($form_passerdate->isSubmitted() && $form_passerdate->isValid()){
-            return $this->redirectToRoute('new_commande');
+            $dates=$request->request->get('passer_date_commande');
+            $Tdebutdate=explode('T',$dates['debutdate']);
+            $Tfindate=explode('T',$dates['findate']);
+            $debutdate =\DateTime::createFromFormat('Y-m-d', $Tdebutdate[0]);
+            $findate =\DateTime::createFromFormat('Y-m-d', $Tfindate[0]);
+            $lesvelos = $repo->findAll();
+            $commande->setDebutdate($debutdate);
+            $commande->setFindate($findate);
+            $entityManager->persist($commande);
+            $form = $this->createForm(CommandeType::class,$commande);
+            $commande->__construct();
+            $form->handleRequest($request);
+          
+          return $this->render('create/new_commande.html.twig', ['lesvelos' => $lesvelos ,
+          'form_commande' => $form->createView(),'form_passerdate' => $form_passerdate->createView()
+      ]);
+
         }
+          $form = $this->createForm(CommandeType::class,$commande);
+          $commande->__construct();
+          $form->handleRequest($request);
+          
+  
+          if($form->isSubmitted() && $form->isValid()){
+              $commande->setCreatedAt(new \DateTimeImmutable());
+              $entityManager->persist($commande);
+              $entityManager->flush();
+  
+              return $this->redirectToRoute('show_commandes');
+          }
+          
+  
+         
+
+
 
         return $this->render('commander/passer_date.html.twig', [
             'form_passerdate' => $form_passerdate->createView()

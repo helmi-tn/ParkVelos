@@ -46,10 +46,16 @@ class Velo
     private $taillevelo;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="velos")
-     * @ORM\JoinColumn(name="participant_id",referencedColumnName="id", nullable=true, onDelete="CASCADE")    
+     * @ORM\OneToMany(targetEntity=Participant::class, mappedBy="velo")
      */
-    private $participant;
+    private $participants;
+
+    public function __construct()
+    {
+        $this->participants = new ArrayCollection();
+    }
+
+
 
  
 
@@ -128,16 +134,36 @@ class Velo
         }
     }
 
-    public function getParticipant(): ?Participant
+    /**
+     * @return Collection|Participant[]
+     */
+    public function getParticipants(): Collection
     {
-        return $this->participant;
+        return $this->participants;
     }
 
-    public function setParticipant(?Participant $participant): self
+    public function addParticipant(Participant $participant): self
     {
-        $this->participant = $participant;
+        if (!$this->participants->contains($participant)) {
+            $this->participants[] = $participant;
+            $participant->setVelo($this);
+        }
 
         return $this;
     }
+
+    public function removeParticipant(Participant $participant): self
+    {
+        if ($this->participants->removeElement($participant)) {
+            // set the owning side to null (unless already changed)
+            if ($participant->getVelo() === $this) {
+                $participant->setVelo(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
 
 }

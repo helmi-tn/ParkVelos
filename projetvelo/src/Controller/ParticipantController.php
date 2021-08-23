@@ -91,12 +91,7 @@ class ParticipantController extends AbstractController
   
         $form = $this->createForm(ParticipantType::class,$participant);
 
-        $velos = $participant->getVelos();
-        foreach($velos as $velo){
-          $participant->removeVelo($velo);
-        }
        
-        $participant->__construct(); 
         $form->handleRequest($request);
   
         if($form->isSubmitted() && $form->isValid()) {

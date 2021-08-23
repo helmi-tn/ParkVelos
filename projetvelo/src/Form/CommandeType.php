@@ -20,8 +20,7 @@ class CommandeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nbpersonnes')
-            ->add('commentaire', TextareaType::class)
+            ->add('commentaire', TextareaType::class, [])
             ->add('debutdate', DateTimeType::class, [
                 'widget' => 'single_text',
             ])

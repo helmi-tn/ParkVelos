@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class VeloType extends AbstractType
 {
@@ -19,7 +20,12 @@ class VeloType extends AbstractType
             ->add('reference')
             ->add('image', FileType::class, ['data_class' => null
             ])
-            ->add('disponibilite')
+            ->add('disponibilite', ChoiceType::class, [
+                'choices'  => [
+                    'Disponible' => 'Disponible',
+                    'Non disponible' => 'Non disponible',
+                ],
+            ])
             ->add('taillevelo', EntityType::class, [
                 'class' => TailleVelo::class,
                 'choice_label' => 'nom', ])

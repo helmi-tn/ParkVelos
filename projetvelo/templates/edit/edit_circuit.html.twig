@@ -2,6 +2,10 @@
 
 {% block title %}Modifier circuit{% endblock %}
 
+{% block javascripts %}
+<script src="{{asset('build/global_assets/js/plugins/extensions/jquery_ui/interactions.min.js')}}"></script>
+<script src="{{asset('build/global_assets/js/demo_pages/form_select2.js')}}"></script>
+{% endblock %}
 
 
 {% block body %}
@@ -58,13 +62,13 @@
                 <div class="form-group row">
                     <label class="col-form-label col-lg-2">Categorie :</label>
                     <div class="col-lg-10">
-                        {{ form_widget(form_circuit.categorie, {'attr' : { 'class': 'select2-selection select2-selection--single', 'style':'width:100%', 'placeholder':'Categorie'}})}}
+                        {{ form_widget(form_circuit.categorie, {'attr' : { 'class': 'form-control select-fixed-single select2-hidden-accessible', 'placeholder':'Categorie'}})}}
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-form-label col-lg-2">Sites :</label>
                     <div class="col-lg-10">
-                        {{ form_widget(form_circuit.site, {'attr' : {'class': 'form-control', 'placeholder':'Sites','multiple' : 'multiple'}})}}
+                        {{ form_widget(form_circuit.site, {'attr' : {'class': 'form-control select-fixed-single select2-hidden-accessible', 'placeholder':'Sites','multiple' : 'multiple'}})}}
                     </div>
                 </div>
                 <br>

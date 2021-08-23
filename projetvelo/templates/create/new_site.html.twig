@@ -2,6 +2,11 @@
 
 {% block title %}New site{% endblock %}
 
+{% block javascripts %}
+<script src="{{asset('build/global_assets/js/plugins/extensions/jquery_ui/interactions.min.js')}}"></script>
+<script src="{{asset('build/global_assets/js/demo_pages/form_select2.js')}}"></script>
+{% endblock %}
+
 {% block body %}
     <br><br><br>
    {{ form_start(form_site,{'attr': {'novalidate': 'novalidate'}} )}}
@@ -44,7 +49,7 @@
                 <div class="form-group row">
                     <label class="col-form-label col-lg-2">Categorie :</label>
                     <div class="col-lg-10">
-                        {{ form_widget(form_site.categoriesite, {'attr' : {'class': 'form-control'}})}}
+                        {{ form_widget(form_site.categoriesite, {'attr' : {'class': 'form-control select-fixed-single select2-hidden-accessible'}})}}
                     </div>
                 </div>
 

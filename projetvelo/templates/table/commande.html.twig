@@ -29,7 +29,6 @@
 							<thead>
 								<tr class="bg-blue">
 									<th>#</th>
-									<th>Nombre de personnes</th>
                                     <th>Date de debut</th>
                                     <th>Date de fin</th>
                                     <th>Commentaire</th>
@@ -40,7 +39,6 @@
                             {% for commande in commandes %}
 								<tr>
 									<td>{{loop.index}}</td>
-									<td>{{commande.nbpersonnes}}</td>
 									<td>{{commande.debutdate|date("d/m/Y")}}</td>
                                     <td>{{commande.findate|date("d/m/Y")}}</td>
                                     <td>{{commande.commentaire}}</td>

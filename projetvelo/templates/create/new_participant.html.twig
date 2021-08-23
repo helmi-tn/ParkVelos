@@ -2,6 +2,11 @@
 
 {% block title %}New participant{% endblock %}
 
+{% block javascripts %}
+<script src="{{asset('build/global_assets/js/plugins/extensions/jquery_ui/interactions.min.js')}}"></script>
+<script src="{{asset('build/global_assets/js/demo_pages/form_select2.js')}}"></script>
+{% endblock %}
+
 {% block body %}
     <br><br><br>
     {{ form_start(form_participant,{'attr': {'novalidate': 'novalidate'}} )}}
@@ -26,7 +31,7 @@
                 <div class="form-group row">
                     <label class="col-form-label col-lg-2">Velo :</label>
                     <div class="col-lg-10">
-                            {{ form_widget(form_participant.velos)}}
+                            {{ form_widget(form_participant.velo, {'attr' : { 'class':'form-control select-fixed-single select2-hidden-accessible'}})}}
                             
                             
                     </div>
@@ -34,7 +39,7 @@
                 <div class="form-group row">
                     <label class="col-form-label col-lg-2">Taille de velo :</label>
                     <div class="col-lg-10">
-                        {{ form_widget(form_participant.taillevelo, {'attr' : { 'class': 'form-control-uniform', 'placeholder':'Velo'}})}}
+                        {{ form_widget(form_participant.taillevelo, {'attr' : { 'class': 'form-control select-fixed-single select2-hidden-accessible', 'placeholder':'Velo'}})}}
                     </div>
                 </div>
 

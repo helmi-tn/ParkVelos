@@ -6,6 +6,7 @@ use App\Entity\Velo;
 use App\Form\VeloType;
 use App\Entity\TailleVelo;
 use App\Entity\Participant;
+use App\Repository\VeloRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -19,17 +20,13 @@ class ParticipantType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('velos', EntityType::class, [
+            ->add('velo', EntityType::class, [
                 'class' => Velo::class,
                 'choice_label'=> 'reference',
-                'multiple'=> true,
-                'expanded'=> true,
-                'choice_attr' => function(Velo $post, $key, $value){ //CHECKBOX ATTR
-                    return [
-                        'class' => 'uniform-checker',
-                    ];
-                }
+                'multiple'=> false,
             ])
+
+
             ->add('taillevelo', EntityType::class, [
                 'class' => TailleVelo::class,
                 'choice_label' => 'nom', ])

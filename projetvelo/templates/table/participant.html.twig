@@ -44,9 +44,7 @@
 									<td>{{participant.nom}}</td>
 									<td>{{participant.prenom}}</td>
                                     <td>
-										{% for velos in participant.velos %}
-											{{velos.reference}} <br>
-										{% endfor %}
+										 {{participant.velo.reference}}
 									</td>
 									<td>{{participant.taillevelo.nom}}</td>
 									<td></td>

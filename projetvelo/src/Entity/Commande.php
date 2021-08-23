@@ -19,10 +19,7 @@ class Commande
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $nbpersonnes;
+
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -70,17 +67,6 @@ class Commande
         return $this->id;
     }
 
-    public function getNbpersonnes(): ?int
-    {
-        return $this->nbpersonnes;
-    }
-
-    public function setNbpersonnes(int $nbpersonnes): self
-    {
-        $this->nbpersonnes = $nbpersonnes;
-
-        return $this;
-    }
 
     public function getCommentaire(): ?string
     {
