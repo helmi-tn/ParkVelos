@@ -88,7 +88,6 @@ class CommandeController extends AbstractController
         $form_passerdate = $this->createForm(PasserDateCommandeType::class,$passerdate);
         $form_passerdate->handleRequest($request);
         
-        $lesvelos = $repo->findAll();
         
         $commande = new Commande();
         if($form_passerdate->isSubmitted() && $form_passerdate->isValid()){
@@ -97,7 +96,9 @@ class CommandeController extends AbstractController
             $Tfindate=explode('T',$dates['findate']);
             $debutdate =\DateTime::createFromFormat('Y-m-d', $Tdebutdate[0]);
             $findate =\DateTime::createFromFormat('Y-m-d', $Tfindate[0]);
-            $lesvelos = $repo->findAll();
+
+            $lesvelos = $repo->findByCommandeDate($Tdebutdate[0],$Tfindate[0]);
+
             $commande->setDebutdate($debutdate);
             $commande->setFindate($findate);
             $entityManager->persist($commande);

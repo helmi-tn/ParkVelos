@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{accessoire.titre}}{% endblock %}
+
+{% block body %}
+<br><br><br>
+ <div class="content">
+    <div class="card">
+        <div class="card-body">
+            <fieldset class="mb-3">
+                <legend class="text-uppercase font-size-sm font-weight-bold">Accessoire </legend>
+
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Titre :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{accessoire.titre}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Reference :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{accessoire.reference}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Image :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {% if accessoire.image == null %}
+                        Pas d'image disponible.
+                    {% else %}
+                        <img style="width:20rem; height:11rem;" src="{{ accessoire.displayPhoto }}">
+                    {% endif %}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Description :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{accessoire.description}}
+                    </div></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Disponibilité :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {{accessoire.disponibilite}}
+                    </div></div>
+                </div>
+                <br>
+                <a href="{{path('show_accessoires')}}"><button type="button" class="btn btn-primary">Retourner</button></a>
+            </fieldset>
+        </div>
+</div>
+</div>
+{% endblock %}

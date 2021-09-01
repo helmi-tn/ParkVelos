@@ -5,10 +5,13 @@ namespace App\Form;
 use App\Entity\Client;
 use App\Entity\Commande;
 use App\Form\ClientType;
+use App\Entity\Accessoire;
+use App\Form\AccessoireType;
 use App\Form\ParticipantType;
 use Symfony\Component\Form\AbstractType;
 use Doctrine\DBAL\Types\DateTimeImmutableType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -35,6 +38,11 @@ class CommandeType extends AbstractType
                 'prototype' => true,
                 'by_reference' => false,
                 'label' => false
+            ])
+            ->add('accessoires', EntityType::class, [
+                'class' => Accessoire::class,
+                'choice_label'=> 'titre',
+                'multiple'=> 'true',
             ])
         ;
     }

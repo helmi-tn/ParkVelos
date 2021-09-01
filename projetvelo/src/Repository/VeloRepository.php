@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Velo;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Velo|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,4 +48,14 @@ class VeloRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findByCommandeDate($datedebut, $datefin)
+    {
+        $sql = "
+        select v.* from commande c LEFT JOIN commande_participant cp ON c.id = cp.commande_id LEFT JOIN participant p ON p.id = cp.participant_id LEFT JOIN velo v ON v.id = p.velo_id WHERE ( (c.findate < '2021-08-10' OR c.debutdate > '2021-08-15') AND v.disponibilite='disponible' ) UNION select v.* from participant p RIGHT JOIN velo v ON v.id = p.velo_id WHERE p.id is null AND v.disponibilite='disponible'";
+            $rsmb = new ResultSetMappingBuilder($this->_em);
+            $rsmb->addRootEntityFromClassMetadata(Velo::class,'u');
+            $resultat = $this->_em->createNativeQuery($sql, $rsmb)->getResult();
+
+        return $resultat;
+    }
 }

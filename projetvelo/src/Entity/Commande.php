@@ -55,11 +55,17 @@ class Commande
      */
     private $participant;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Accessoire::class, mappedBy="commande")
+     */
+    private $accessoires;
+
     
 
     public function __construct()
     {
         $this->participant = new ArrayCollection();
+        $this->accessoires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -160,6 +166,36 @@ class Commande
     public function removeParticipant(Participant $participant): self
     {
         $this->participant->removeElement($participant);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Accessoire[]
+     */
+    public function getAccessoires(): Collection
+    {
+        return $this->accessoires;
+    }
+
+    public function addAccessoire(Accessoire $accessoire): self
+    {
+        if (!$this->accessoires->contains($accessoire)) {
+            $this->accessoires[] = $accessoire;
+            $accessoire->setCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAccessoire(Accessoire $accessoire): self
+    {
+        if ($this->accessoires->removeElement($accessoire)) {
+            // set the owning side to null (unless already changed)
+            if ($accessoire->getCommande() === $this) {
+                $accessoire->setCommande(null);
+            }
+        }
 
         return $this;
     }

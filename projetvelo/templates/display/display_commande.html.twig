@@ -10,6 +10,15 @@
             <fieldset class="mb-3">
                 <legend class="text-uppercase font-size-sm font-weight-bold">Commande </legend>
                 <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Accessoires :</label>
+                    <div class="col-lg-10">
+                    <div class="form-control">
+                    {% for chaque in commande.accessoires %}
+                    {{chaque.titre}} <br>
+                    {% endfor %}
+                    </div></div>
+                </div>
+                <div class="form-group row">
                     <label class="col-form-label col-lg-2">Date de debut :</label>
                     <div class="col-lg-10">
                     <div class="form-control">

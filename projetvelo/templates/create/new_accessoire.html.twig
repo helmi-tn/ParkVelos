@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New accessoire{% endblock %}
+
+
+
+{% block body %}
+    <br><br><br>
+    {{ form_start(form_accessoire)}}
+    <div class="content">
+    <div class="card">
+        <div class="card-body">
+            <fieldset class="mb-3">
+                <legend class="text-uppercase font-size-sm font-weight-bold">Créer une accessoire</legend>
+
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Nom de l'accessoire :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_accessoire.titre, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'Titre'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Reference :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_accessoire.reference, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'Reference'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Image :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_accessoire.image, {'attr' : { 'class': 'form-control-uniform', 'placeholder':'Image'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Description :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_accessoire.description, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'Description'}})}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2">Disponibilité :</label>
+                    <div class="col-lg-10">
+                        {{ form_widget(form_accessoire.disponibilite, {'attr' : {'required':'required' , 'class': 'form-control', 'placeholder':'Reference'}})}}
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary" style="float:right;">Submit <i class="icon-checkmark3 font-size-base mr-1"></i></button>
+            </fieldset>
+        </div>
+</div>
+</div>
+
+{{ form_end(form_accessoire)}}
+</form>
+
+
+{% endblock %}
